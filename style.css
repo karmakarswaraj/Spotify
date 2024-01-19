@@ -64,17 +64,17 @@ body {
 .lib-box ul li p {
   font-size: small;
 }
-.local-songs{
+.local-songs {
   background-color: #242424;
   padding-left: 10px;
   margin: 0px 10px 10px 10px;
   border-radius: 7px;
 }
-.local-songs ul{
+.local-songs ul {
   margin: 20px 8px 20px 8px;
   height: 40vh;
 }
-.local-songs ul li{
+.local-songs ul li {
   list-style-type: decimal;
   display: flex;
   justify-content: space-between;
@@ -96,7 +96,7 @@ body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  width: 100%; 
+  width: 100%;
 }
 .btn {
   border: none;
@@ -109,8 +109,6 @@ body {
   background: #303030;
   color: white;
 }
-
-
 
 .footer {
   padding: 20px;
