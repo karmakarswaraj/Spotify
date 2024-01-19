@@ -10,7 +10,6 @@ body {
 }
 
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -34,6 +33,7 @@ body {
   color: white;
 }
 .box-2 {
+  height: 80vh;
   margin: 8px 4px 4px 8px;
 }
 .stack {
@@ -60,6 +60,44 @@ body {
   padding-top: 14px;
   color: white;
 }
+
+.lib-box ul li p {
+  font-size: small;
+}
+.local-songs{
+  background-color: #242424;
+  padding-left: 10px;
+  margin: 0px 10px 10px 10px;
+  border-radius: 7px;
+}
+.local-songs ul{
+  margin: 20px 8px 20px 8px;
+  height: 40vh;
+}
+.local-songs ul li{
+  list-style-type: decimal;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  cursor: pointer;
+  padding: 12px 12px;
+  background: #000;
+  border-radius: 7px;
+  margin: 8px 0px;
+}
+
+.info {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 10px;
+}
+.info div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%; 
+}
 .btn {
   border: none;
   border-radius: 20px;
@@ -71,9 +109,9 @@ body {
   background: #303030;
   color: white;
 }
-.lib-box ul li p {
-  font-size: small;
-}
+
+
+
 .footer {
   padding: 20px;
   margin: 8px;
