@@ -1,36 +1,36 @@
-.border{
-    border: 2px solid rgb(255, 0, 0);
-    margin: 3px;
+.border {
+  border: 2px solid rgb(255, 0, 0);
+  margin: 3px;
 }
-.flex{
-    display: flex;
+.flex {
+  display: flex;
 }
-.justify-centre{
-    justify-content: center;
+.justify-centre {
+  justify-content: center;
 }
-.align-centre{
-    align-items: center;
+.align-centre {
+  align-items: center;
 }
-.bg-black{
-    background-color: #000;
-    color: white;
+.bg-black {
+  background-color: #000;
+  color: white;
 }
-.bg-grey{
-    background-color: #121212;
+.bg-grey {
+  background-color: #121212;
 }
-.invert{
-    filter: invert(1);
+.invert {
+  filter: invert(1);
 }
-.rounded{
-    border-radius: 7px;
+.rounded {
+  border-radius: 7px;
 }
-.m1{
-    margin-top: 8px;
-    margin-left: 8px;
+.m1 {
+  margin-top: 8px;
+  margin-left: 8px;
 }
-.flex-wrap{
-    flex-wrap: wrap;
+.flex-wrap {
+  flex-wrap: wrap;
 }
-.justify-content{
-    justify-content: space-between;
+.justify-content {
+  justify-content: space-between;
 }
