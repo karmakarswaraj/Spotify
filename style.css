@@ -4,7 +4,15 @@
   padding: 0;
   font-family: "Poppins", sans-serif;
 }
+html,
 body {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
 }
 .left {
@@ -175,4 +183,21 @@ body {
 .scroll {
   max-height: 100vh;
   overflow-y: scroll;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* padding: 20px; */
+  background-color: #ffffff;
+}
+
+.song-nav {
+  justify-content: center;
+}
+
+.seekbar-container {
+  width: 80%;
+  margin: 20px auto;
 }
