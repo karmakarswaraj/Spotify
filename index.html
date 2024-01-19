@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spotify</title>
+    <title>Spotify - Web Player</title>
+    <link rel="icon" href="./img/icon.svg" type="" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="utility.css" />
   </head>
@@ -152,204 +153,265 @@
           </div>
 
           <div class="sign-in">
-            <button class="btn">Sign up</button>
+            <button class="btn-1">Sign up</button>
             <button class="btn">Log in</button>
           </div>
         </div>
 
-        <div class="playlist s1">
-          <section class="">
-            <div class="head">
-              <h2>Good Morning</h2>
-              <span class="m1"><a href="">Show all</a></span>
-            </div>
-            <h4 class="head">Playlists</h4>
-            <div class="boxes flex flex-wrap justify-content">
-              <div class="card rounded">
-                <img
-                  class="rounded"
-                  src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
-                  alt=""
-                />
-                <div>
-                  <h3>Sleep</h3>
-                  <span>Gentle ambient piano to help you fall asleep</span>
-                </div>
+        <div class="playlist s1 scroll">
+          <div class="online">
+            <section class="">
+              <div class="head">
+                <h2>Good Morning</h2>
+                <span class="m1"><a href="">Show all</a></span>
               </div>
-              <div class="card rounded">
-                <img
-                  class="rounded"
-                  src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
-                  alt=""
-                />
-                <div>
-                  <h3>Sleep</h3>
-                  <span>Gentle ambient piano to help you fall asleep</span>
-                </div>
-              </div>
-              <div class="card rounded">
-                <img
-                  class="rounded"
-                  src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
-                  alt=""
-                />
-                <div>
-                  <h3>Sleep</h3>
-                  <span>Gentle ambient piano to help you fall asleep</span>
-                </div>
-              </div>
-              <div class="card rounded">
-                <img
-                  class="rounded"
-                  src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
-                  alt=""
-                />
-                <div>
-                  <h3>Sleep</h3>
-                  <span>Gentle ambient piano to help you fall asleep</span>
-                </div>
-              </div>
-              <div class="card rounded">
-                <img
-                  class="rounded"
-                  src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
-                  alt=""
-                />
-                <div>
-                  <h3>Sleep</h3>
-                  <span>Gentle ambient piano to help you fall asleep</span>
-                </div>
-              </div>
-              <div class="card rounded">
-                <img
-                  class="rounded"
-                  src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
-                  alt=""
-                />
-                <div>
-                  <h3>Sleep</h3>
-                  <span>Gentle ambient piano to help you fall asleep</span>
-                </div>
-              </div>
-              <div class="card rounded">
-                <img
-                  class="rounded"
-                  src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
-                  alt=""
-                />
-                <div>
-                  <h3>Sleep</h3>
-                  <span>Gentle ambient piano to help you fall asleep</span>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          <section class="">
-            <div class="head">
-              <h2>Sleep</h2>
-            </div>
-            <div class="boxes flex flex-wrap">
-              <div class="card rounded">
-                <img
-                  class="rounded"
-                  src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
-                  alt=""
-                />
-                <div>
-                  <h3>Sleep</h3>
-                  <span>Gentle ambient piano to help you fall asleep</span>
-                </div>
-              </div>
-              <div class="card rounded">
-                <img
-                  class="rounded"
-                  src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
-                  alt=""
-                />
-                <div>
-                  <h3>Sleep</h3>
-                  <span>Gentle ambient piano to help you fall asleep</span>
-                </div>
-              </div>
-            </div>
-          </section>
+              <h4 class="head">Playlists</h4>
 
-          <section class="flex">
-            <div class="about flex flex-wrap justify-content">
-              <div class="company">
-                <h3>Company</h3>
-                <ul>
-                  <li>About</li>
-                  <li>Jobs</li>
-                  <li>For the Record</li>
-                </ul>
+              <div class="boxes flex flex-wrap justify-content">
+                <div class="card rounded">
+                  <div class="play flex align-centre">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="injected-svg"
+                      data-src="/icons/play-stroke-sharp.svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      role="img"
+                      color="#000000"
+                    >
+                      <path
+                        d="M5 20V4L19 12L5 20Z"
+                        stroke="#000000"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                        fill="#000"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <img
+                    class="rounded"
+                    src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
+                    alt=""
+                  />
+                  <div>
+                    <h3>Sleep</h3>
+                    <span>Gentle ambient piano to help you fall asleep</span>
+                  </div>
+                </div>
+                <div class="card rounded">
+                  <div class="play flex align-centre">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="injected-svg"
+                      data-src="/icons/play-stroke-sharp.svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      role="img"
+                      color="#000000"
+                    >
+                      <path
+                        d="M5 20V4L19 12L5 20Z"
+                        stroke="#000000"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                        fill="#000"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <img
+                    class="rounded"
+                    src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
+                    alt=""
+                  />
+                  <div>
+                    <h3>Sleep</h3>
+                    <span>Gentle ambient piano to help you fall asleep</span>
+                  </div>
+                </div>
+                <div class="card rounded">
+                  <div class="play flex align-centre">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="injected-svg"
+                      data-src="/icons/play-stroke-sharp.svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      role="img"
+                      color="#000000"
+                    >
+                      <path
+                        d="M5 20V4L19 12L5 20Z"
+                        stroke="#000000"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                        fill="#000"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <img
+                    class="rounded"
+                    src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
+                    alt=""
+                  />
+                  <div>
+                    <h3>Sleep</h3>
+                    <span>Gentle ambient piano to help you fall asleep</span>
+                  </div>
+                </div>
+                <div class="card rounded">
+                  <div class="play flex align-centre">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="injected-svg"
+                      data-src="/icons/play-stroke-sharp.svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      role="img"
+                      color="#000000"
+                    >
+                      <path
+                        d="M5 20V4L19 12L5 20Z"
+                        stroke="#000000"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                        fill="#000"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <img
+                    class="rounded"
+                    src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
+                    alt=""
+                  />
+                  <div>
+                    <h3>Sleep</h3>
+                    <span>Gentle ambient piano to help you fall asleep</span>
+                  </div>
+                </div>
+                <div class="card rounded">
+                  <div class="play flex align-centre">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="injected-svg"
+                      data-src="/icons/play-stroke-sharp.svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      role="img"
+                      color="#000000"
+                    >
+                      <path
+                        d="M5 20V4L19 12L5 20Z"
+                        stroke="#000000"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                        fill="#000"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <img
+                    class="rounded"
+                    src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
+                    alt=""
+                  />
+                  <div>
+                    <h3>Sleep</h3>
+                    <span>Gentle ambient piano to help you fall asleep</span>
+                  </div>
+                </div>
+                <div class="card rounded">
+                  <div class="play flex align-centre">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="injected-svg"
+                      data-src="/icons/play-stroke-sharp.svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      role="img"
+                      color="#000000"
+                    >
+                      <path
+                        d="M5 20V4L19 12L5 20Z"
+                        stroke="#000000"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                        fill="#000"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <img
+                    class="rounded"
+                    src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
+                    alt=""
+                  />
+                  <div>
+                    <h3>Sleep</h3>
+                    <span>Gentle ambient piano to help you fall asleep</span>
+                  </div>
+                </div>
+                <div class="card rounded">
+                  <div class="play flex align-centre">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="injected-svg"
+                      data-src="/icons/play-stroke-sharp.svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      role="img"
+                      color="#000000"
+                    >
+                      <path
+                        d="M5 20V4L19 12L5 20Z"
+                        stroke="#000000"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                        fill="#000"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <img
+                    class="rounded"
+                    src="https://i.scdn.co/image/ab67706f0000000281722192322800ae99c2ed06"
+                    alt=""
+                  />
+                  <div>
+                    <h3>Sleep</h3>
+                    <span>Gentle ambient piano to help you fall asleep</span>
+                  </div>
+                </div>
               </div>
-              <div class="community">
-                <h3>Communities</h3>
-                <ul>
-                  <li>For Artists</li>
-                  <li>Devlopers</li>
-                  <li>Advertising</li>
-                  <li>Investors</li>
-                  <li>Vendors</li>
-                </ul>
-              </div>
-              <div class="links">
-                <h3>Useful links</h3>
-                <ul>
-                  <li>Support</li>
-                  <li>Free Mobile App</li>
-                </ul>
-              </div>
-            </div>
-            <div class="social flex">
-              <div class="nav">
-                <button class="navigate">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    class="injected-svg"
-                    data-src="/icons/arrow-left-01-stroke-sharp.svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    role="img"
-                    color="#000000"
-                  >
-                    <path
-                      d="M15 6L9 12L15 18"
-                      stroke="#ffffff"
-                      stroke-width="1.5"
-                      stroke-miterlimit="16"
-                    ></path>
-                  </svg>
-                </button>
-                <button class="navigate">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    class="injected-svg"
-                    data-src="/icons/arrow-right-01-stroke-sharp.svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    role="img"
-                    color="#000000"
-                  >
-                    <path
-                      d="M9.00005 6L15 12L9 18"
-                      stroke="#ffffff"
-                      stroke-width="1.5"
-                      stroke-miterlimit="16"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </section>
+            </section>
+          </div>
+
+          <div class="offline scroll"></div>
         </div>
       </div>
     </div>

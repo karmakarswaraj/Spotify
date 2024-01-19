@@ -4,6 +4,9 @@
   padding: 0;
   font-family: "Poppins", sans-serif;
 }
+body {
+  overflow: hidden;
+}
 .left {
   width: 18vw;
 }
@@ -56,6 +59,10 @@
   cursor: pointer;
   margin-left: auto;
 }
+.btn:hover {
+  background: #303030;
+  color: white;
+}
 .lib-box ul li p {
   font-size: small;
 }
@@ -100,6 +107,20 @@
   border: none;
   padding: 2px;
 }
+.btn-1 {
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px 10px 20px;
+  background: #000;
+  color: grey;
+  cursor: pointer;
+  margin-left: auto;
+}
+.btn-1:hover {
+  background: #303030;
+  color: white;
+}
+
 .s1 {
   background: linear-gradient(to top, #1a1a1a, #242424);
 }
@@ -114,12 +135,15 @@
 }
 .boxes {
   padding: 0px 0px 40px 0px;
-
+  height: 65vh;
   margin: 8px;
 }
 .card {
   width: 165px;
+  height: 33vh;
   padding: 18px;
+  position: relative;
+  /* background-color: #000; */
   background: linear-gradient(to bottom, #1d1d1d, #242424);
 }
 .card img {
@@ -128,4 +152,27 @@
 }
 .about ul li {
   list-style: none;
+}
+.play {
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  background-color: #1fdf64;
+  border-radius: 50%;
+  justify-content: center;
+  position: absolute;
+  top: 125px;
+  right: 25px;
+  opacity: 0;
+  transition: 1s ease-in;
+}
+
+.play svg {
+  width: 60%;
+  stroke: #000000;
+}
+
+.scroll {
+  max-height: 100vh;
+  overflow-y: scroll;
 }
