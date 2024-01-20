@@ -84,7 +84,6 @@ body {
   background: #1e1e1e;
   border-radius: 7px;
   margin: 8px 0px;
-  /* box-shadow: #ffffff 0px 0px 0px 1px; */
 }
 
 .info {
@@ -127,7 +126,6 @@ body {
   align-items: center;
 }
 .footer-btn button {
-  /* margin: 10px; */
   background: none;
   color: white;
   border: 0.5px solid white;
@@ -188,7 +186,6 @@ body {
   height: 33vh;
   padding: 18px;
   position: relative;
-  /* background-color: #000; */
   background: linear-gradient(to bottom, #1d1d1d, #242424);
 }
 .card img {
@@ -228,14 +225,11 @@ footer {
   left: 0;
   right: 0;
   padding: 10px;
-  /* width: 100vw; */
-  /* padding: 20px; */
   background-color: #ffffff;
   filter: invert(1);
 }
 .song {
   padding: 15px;
-  /* position: ; */
 }
 .song-nav {
   justify-content: center;
@@ -244,7 +238,6 @@ footer {
 .seekbar-container {
   width: 100%;
 }
-
 
 .seek {
   width: 600px;
@@ -255,14 +248,14 @@ footer {
   padding: 2px;
   position: relative;
   background-color: #00000000;
-  overflow: hidden; 
+  overflow: hidden;
   cursor: pointer;
 }
 
 .progress-bar {
   height: 100%;
   background-color: rgb(0, 0, 0);
-  transition: width 0.1s linear; 
+  transition: width 0.1s linear;
   width: 0;
 }
 
@@ -281,10 +274,9 @@ footer {
   left: 16%;
 }
 
-.song-info{
+.song-info {
   padding: 20px 30px 0px 30px;
   position: relative;
   overflow: hidden;
   width: 10%;
-
 }

@@ -29,29 +29,29 @@ let getSongs = async function () {
 };
 
 function getSongDetails(songTitle) {
-  let parts = songTitle.split(" - ");
+  let parts = songTitle.split(" - ");// split the song title
   let artistName = parts[1] || "Unknown";
   let songName = parts[0] || "Unknown";
 
   return { songName, artistName };
 }
 async function playMusic(songTitle, artist, pause = false) {
-  let src;
+  let src;// create a variable to store the source
   if (artist === "Unknown") {
-    src = "/songs/" + songTitle + ".mp3";
+    src = "/songs/" + songTitle + ".mp3";// if the artist is unknown
   } else {
-    src = "/songs/" + songTitle + "%20-%20" + artist + ".mp3";
+    src = "/songs/" + songTitle + "%20-%20" + artist + ".mp3";  // if the artist is known
   }
 
-  if (currSong.src !== src) {
+  if (currSong.src !== src) {// if the current song is not the same as the source
     currSong.src = src;
-    await currSong.load();
+    await currSong.load();// load the song
   }
 
   try {
     if (!pause) {
-      await currSong.play();
-      play.src = "./img/pause1.svg";
+      await currSong.play();// play the song
+      play.src = "./img/pause1.svg";  // update the play button
     }
 
     document.querySelector(".song-info").innerHTML = `
@@ -59,15 +59,15 @@ async function playMusic(songTitle, artist, pause = false) {
       <div>Song - ${songTitle}</div>
       <div>Artist - ${artist}</div>
     </div>
-  `;
+  `;// update the song info
     duration.innerHTML = "00:00";
-    totalDuration.innerHTML = "00:00";
+    totalDuration.innerHTML = "00:00";// update the duration and total duration
   } catch (error) {
     console.error("Failed to play audio:", error);
   }
 }
 
-async function pauseMusic() {
+async function pauseMusic() {// pause the music
   try {
     await currSong.pause();
     play.src = "./img/play.svg";
@@ -76,7 +76,7 @@ async function pauseMusic() {
   }
 }
 
-function formatTime(seconds) {
+function formatTime(seconds) {// format the time
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
   return `${String(minutes).padStart(2, "0")}:${String(
@@ -87,22 +87,22 @@ function formatTime(seconds) {
 async function main() {
   let songs = await getSongs();
 
-  const firstSong = Object.keys(songs)[1];
+  const firstSong = Object.keys(songs)[1];// get the first song
   const [songName, artistName] = firstSong.split(' - ');
 
-  await playMusic(songName.trim(),artistName.trim(),true);
+  await playMusic(songName.trim(),artistName.trim(),true);// play the first song
 
 
   const localSongs = document
     .querySelector(".local-songs")
-    .getElementsByTagName("ul")[0];
+    .getElementsByTagName("ul")[0];// get the local songs
 
   let isFirstIteration = true;
   let currentlyPlayingLi = null;
 
   Object.entries(songs).forEach(([key, value]) => {
     if (!isFirstIteration) {
-      let { songName, artistName } = getSongDetails(key);
+      let { songName, artistName } = getSongDetails(key);// get the song details
 
       localSongs.innerHTML += `<li><img class="invert" src="./img/music.svg" alt>
         <div class="info">
@@ -110,7 +110,7 @@ async function main() {
           <div>${artistName}</div>
         </div>
         <img class="invert play-button" src="./img/playnow.svg" alt="">
-      </li>`;
+      </li>`; // add the song to the local songs
     } else {
       isFirstIteration = false;
     }
@@ -118,12 +118,12 @@ async function main() {
 
   const allLiElements = localSongs.querySelectorAll("li");
 
-  function updatePlayPauseIcon(li, isPlaying) {
+  function updatePlayPauseIcon(li, isPlaying) {// update the play/pause icon
     const playButton = li.getElementsByClassName("invert")[1];
     playButton.src = isPlaying ? "./img/pause.svg" : "./img/playnow.svg";
   }
 
-  allLiElements.forEach((li) => {
+  allLiElements.forEach((li) => {// add the click event listener
     li.addEventListener("click", async () => {
       const songTitle = li.querySelector(".info").firstElementChild.innerHTML;
       const artTitle = li.querySelector(".info").lastElementChild.innerHTML;
