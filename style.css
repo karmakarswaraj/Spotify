@@ -228,14 +228,26 @@ footer {
   width: 100%;
   /* padding: 20px; */
   background-color: #ffffff;
+  filter: invert(1);
 }
-
+.song {
+  padding: 15px;
+}
 .song-nav {
   justify-content: center;
 }
 
 .seekbar-container {
   width: 80%;
-  margin: 20px auto;
 }
-
+.seek {
+  width: 650px;
+  background-color: #838383;
+  border-radius: 10px;
+  position: relative;
+  margin: 10px;
+  padding: 2px;
+}
+.pad {
+  padding: 0px 20px 2px 20px;
+}
