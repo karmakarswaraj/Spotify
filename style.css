@@ -71,7 +71,7 @@ body {
   border-radius: 7px;
 }
 .local-songs ul {
-  margin: 20px 8px 20px 8px;
+  margin: 10px 8px 10px 8px;
   height: 40vh;
 }
 .local-songs ul li {
@@ -81,9 +81,10 @@ body {
   gap: 30px;
   cursor: pointer;
   padding: 12px 12px;
-  background: #000;
+  background: #1e1e1e;
   border-radius: 7px;
   margin: 8px 0px;
+  /* box-shadow: #ffffff 0px 0px 0px 1px; */
 }
 
 .info {
@@ -237,3 +238,4 @@ footer {
   width: 80%;
   margin: 20px auto;
 }
+
