@@ -56,3 +56,7 @@
 ::-webkit-scrollbar-button {
   display: none;
 }
+
+.c-pointer{
+  cursor: pointer;
+}

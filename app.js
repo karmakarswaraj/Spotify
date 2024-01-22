@@ -138,11 +138,38 @@ async function playShuffledSongs(songs) {
 
 const seekBar = document.querySelector(".seek");
 const progressBar = document.querySelector(".progress-bar");
+const volBar = document.getElementById("volBar");
+const volKnob = document.getElementById("volKnob");
+// const audio = document.getElementById("currSong");
+
+// audio.volume = 1;
 
 function handleDrag(e) {
   const progress = (e.offsetX / seekBar.getBoundingClientRect().width) * 100;
   progressBar.style.width = progress + "%";
   currSong.currentTime = (progress / 100) * currSong.duration;
+}
+function handleDragVol(e) {
+  const barRect = volBar.getBoundingClientRect();
+  const offsetX = e.clientX - barRect.left;
+
+  const validOffsetX = Math.min(barRect.width, Math.max(0, offsetX));
+  
+  const percentage = (validOffsetX / barRect.width) * 100;
+ 
+  // Ensure the percentage is within 0 to 100
+  const validPercentage = Math.min(100, Math.max(0, percentage));
+  console.log(validPercentage);
+  volKnob.style.left = `${validPercentage}%`;
+ // Do something with the volume based on the validPercentage (e.g., update audio volume)
+  const volume = validPercentage / 100;
+  
+
+  if (currSong) {
+    currSong.volume = volume;
+  }
+
+  console.log(`Volume: ${volume}`);
 }
 
 async function main() {
@@ -332,6 +359,25 @@ async function main() {
       const { songName, artistName } = getSongDetails(nextSong);
       playMusic(songName, artistName);
     }
+  });
+
+  let isDrag = false;
+
+  volBar.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    isDrag = true;
+    console.log("down");
+    handleDragVol(e);
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (isDrag) {
+      handleDragVol(e);
+    }
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDrag = false;
   });
 }
 
