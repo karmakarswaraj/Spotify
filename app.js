@@ -1,5 +1,8 @@
 let currSong = new Audio();
 let songs;
+let isRepeat = false;
+let isShuffle = false;
+
 let getSongs = async function () {
   try {
     let response = await fetch("http://127.0.0.1:5500/songs");
@@ -50,6 +53,16 @@ async function playMusic(songTitle, artist, pause = false, callback = null) {
     currSong.load(); // load the song
   }
 
+  if (isRepeat) {
+    // Set the repeat attribute of the audio element
+    // currSong.setAttribute("loop", "loop");
+    currSong.loop = true;
+  } else {
+    // Remove the repeat attribute
+    // currSong.removeAttribute("loop");
+    currSong.loop = false;
+  }
+
   try {
     if (!pause) {
       await currSong.play(); // play the song
@@ -64,7 +77,6 @@ async function playMusic(songTitle, artist, pause = false, callback = null) {
   `; // update the song info
     duration.innerHTML = "00:00";
     totalDuration.innerHTML = "00:00"; // update the duration and total duration
-    
   } catch (error) {
     console.error("Failed to play audio:", error);
   }
@@ -90,6 +102,38 @@ function formatTime(seconds) {
   return `${String(minutes).padStart(2, "0")}:${String(
     remainingSeconds
   ).padStart(2, "0")}`;
+}
+
+// Function to shuffle an array using the Fisher-Yates algorithm
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 1; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// Function to get a shuffled array of song keys from the songs object
+function getShuffledKeys(songs) {
+  const keys = Object.keys(songs);
+  return shuffleArray(keys);
+}
+
+async function playShuffledSongs(songs) {
+  const shuffledKeys = getShuffledKeys(songs);
+
+  for (const key of shuffledKeys) {
+    const { songName, artistName } = getSongDetails(key);
+    // console.log(songName, artistName);
+    playMusic(songName, artistName);
+
+    // Add a delay if needed between playing each song
+    await new Promise((resolve) => {
+      currSong.addEventListener("ended", () => {
+        resolve();
+      });
+    });
+  }
 }
 
 const seekBar = document.querySelector(".seek");
@@ -121,7 +165,7 @@ async function main() {
     if (!isFirstIteration) {
       let { songName, artistName } = getSongDetails(key); // get the song details
 
-      localSongs.innerHTML += `<li><img class="invert" src="./img/music.svg" alt>
+      localSongs.innerHTML += `<li><img class="invert mimg" src="./img/music.svg" alt>
         <div class="info">
           <div>${songName}</div>
           <div>${artistName}</div>
@@ -233,16 +277,30 @@ async function main() {
     isDragging = false;
   });
 
-
   //Add event listner for shuffle
   shuffle.addEventListener("click", async () => {
-
+    isShuffle = !isShuffle;
+    if (isShuffle) {
+      shuffle.src = "./img/shuffleOn.svg";
+      await playShuffledSongs(songs);
+      isShuffle = true;
+    } else {
+      shuffle.src = "./img/shuffle.svg";
+      isShuffle = false;
+    }
   });
 
   //Add event listener for repeat
   repeat.addEventListener("click", async () => {
-   
-    });
+    isRepeat = !isRepeat;
+    if (isRepeat) {
+      repeat.src = "./img/repeat1.svg";
+      currSong.loop = true;
+    } else {
+      repeat.src = "./img/repeat.svg";
+      currSong.loop = false;
+    }
+  });
 
   //Add event listener for previous
   prev.addEventListener("click", async () => {
@@ -268,26 +326,12 @@ async function main() {
     );
     console.log(index);
 
-    // if (index < len - 1) {
-    //   const nextSong = Object.keys(songs)[index + 1];
+    if (index < len - 1) {
+      const nextSong = Object.keys(songs)[index + 1];
 
-    //   const { songName, artistName } = getSongDetails(nextSong);
-    //   playMusic(songName, artistName);
-    // }
-
-    let nextIndex;
-
-    if (isShuffle) {
-      // Shuffle logic
-      nextIndex = Math.floor(Math.random() * len);
-    } else {
-      // Normal next logic
-      nextIndex = index < len - 1 ? index + 1 : 0;
+      const { songName, artistName } = getSongDetails(nextSong);
+      playMusic(songName, artistName);
     }
-
-    const nextSong = Object.keys(songs)[nextIndex];
-    const { songName, artistName } = getSongDetails(nextSong);
-    playMusic(songName, artistName);
   });
 }
 
