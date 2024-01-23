@@ -281,19 +281,6 @@ footer {
   width: 10%;
 }
 
-/* .vol-control {
-  width: 100px;
-  height: 1px;
-  border: 1px solid #000;
-  border-radius: 10px;
-  margin: 10px;
-  padding: 2px;
-  position: relative;
-  background-color: #00000000;
-  overflow: hidden;
-  cursor: pointer;
-} */
-
 #volBar {
   width: 100px;
   height: 1px;

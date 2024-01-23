@@ -1,12 +1,20 @@
+const seekBar = document.querySelector(".seek");
+const progressBar = document.querySelector(".progress-bar");
+const volBar = document.getElementById("volBar");
+const volKnob = document.getElementById("volKnob");
+
 let currSong = new Audio();
 let songs;
+let currFolder;
 let isRepeat = false;
 let isShuffle = false;
 
-let getSongs = async function () {
+let getSongs = async function (folder) {
+  currFolder = folder;
   try {
-    let response = await fetch("http://127.0.0.1:5500/songs");
+    let response = await fetch(`http://127.0.0.1:5500/${currFolder}`);
     let data = await response.text();
+    // console.log(data);
 
     let parser = new DOMParser(); // Create a new instance of the DOMParser class
     let doc = parser.parseFromString(data, "text/html"); // Parse the HTML string
@@ -41,10 +49,11 @@ function getSongDetails(songTitle) {
 }
 async function playMusic(songTitle, artist, pause = false, callback = null) {
   let src; // create a variable to store the source
+
   if (artist === "Unknown") {
-    src = "/songs/" + songTitle + ".mp3"; // if the artist is unknown
+    src = `${currFolder}/` + songTitle + ".mp3"; // if the artist is unknown
   } else {
-    src = "/songs/" + songTitle + "-" + artist + ".mp3"; // if the artist is known
+    src = `${currFolder}/` + songTitle + "-" + artist + ".mp3"; // if the artist is known
   }
 
   if (currSong.src !== src) {
@@ -55,11 +64,9 @@ async function playMusic(songTitle, artist, pause = false, callback = null) {
 
   if (isRepeat) {
     // Set the repeat attribute of the audio element
-    // currSong.setAttribute("loop", "loop");
     currSong.loop = true;
   } else {
     // Remove the repeat attribute
-    // currSong.removeAttribute("loop");
     currSong.loop = false;
   }
 
@@ -77,6 +84,9 @@ async function playMusic(songTitle, artist, pause = false, callback = null) {
   `; // update the song info
     duration.innerHTML = "00:00";
     totalDuration.innerHTML = "00:00"; // update the duration and total duration
+    if (callback && typeof callback === "function") {
+      callback();
+    }
   } catch (error) {
     console.error("Failed to play audio:", error);
   }
@@ -136,14 +146,7 @@ async function playShuffledSongs(songs) {
   }
 }
 
-const seekBar = document.querySelector(".seek");
-const progressBar = document.querySelector(".progress-bar");
-const volBar = document.getElementById("volBar");
-const volKnob = document.getElementById("volKnob");
-// const audio = document.getElementById("currSong");
-
-// audio.volume = 1;
-
+// Event listeners
 function handleDrag(e) {
   const progress = (e.offsetX / seekBar.getBoundingClientRect().width) * 100;
   progressBar.style.width = progress + "%";
@@ -183,10 +186,11 @@ function handleDragVol(e) {
 }
 
 async function main() {
-  songs = await getSongs();
+  songs = await getSongs("songs/second");
 
   const firstSong = Object.keys(songs)[1]; // get the first song
   console.log(firstSong);
+
   const [songName, artistName] = firstSong.split("-");
 
   await playMusic(songName, artistName, true); // play the first song
@@ -283,6 +287,7 @@ async function main() {
     // This event is triggered once
     const totalDurationElement = document.getElementById("totalDuration");
     totalDurationElement.textContent = formatTime(currSong.duration);
+    
   });
 
   currSong.addEventListener("timeupdate", () => {
@@ -293,6 +298,9 @@ async function main() {
     const progressBar = seekBar.querySelector(".progress-bar");
     const progress = (currSong.currentTime / currSong.duration) * 100;
     progressBar.style.width = `${progress}%`;
+    if(currSong.currentTime == currSong.duration){
+      play.src = "./img/play1.svg";
+    }
   });
 
   // Add event listener to seekbar -- CLICK & DRAG
@@ -342,7 +350,7 @@ async function main() {
   //Add event listener for previous
   prev.addEventListener("click", async () => {
     const index = Object.values(songs).indexOf(
-      "/songs/" + currSong.src.split("/").slice(-1)[0]
+      `/songs/${currFolder}` + currSong.src.split("/").slice(-1)[0]
     );
 
     console.log(index);
@@ -352,24 +360,37 @@ async function main() {
       console.log(prevSong);
       const { songName, artistName } = getSongDetails(prevSong);
       playMusic(songName, artistName);
+    } else {
+      // If the current song is the first one, play the last song in the list
+      const keys = Object.keys(songs);
+      const lastSong = keys[keys.length - 1];
+      const { songName, artistName } = getSongDetails(lastSong);
+      playMusic(songName, artistName);
     }
   });
 
   //Add event listener for next
   next.addEventListener("click", async () => {
-    console.log("n");
     const index = Object.values(songs).indexOf(
-      "/songs/" + currSong.src.split("/").slice(-1)[0]
+      `/songs/${currFolder}` + currSong.src.split("/").slice(-1)[0]
     );
+
     console.log(index);
 
-    if (index < len - 1) {
+    if (index < Object.keys(songs).length - 2) {
       const nextSong = Object.keys(songs)[index + 1];
-
+      console.log(nextSong);
       const { songName, artistName } = getSongDetails(nextSong);
       playMusic(songName, artistName);
+    } else {
+      // If the current song is the last one, play the first song in the list
+      const firstSong = Object.keys(songs)[0];
+      const { songName, artistName } = getSongDetails(firstSong);
+      playMusic(songName, artistName);
     }
-  });
+});
+
+  
 
   let isDrag = false;
 
