@@ -154,16 +154,15 @@ function handleDragVol(e) {
   const offsetX = e.clientX - barRect.left;
 
   const validOffsetX = Math.min(barRect.width, Math.max(0, offsetX));
-  
+
   const percentage = (validOffsetX / barRect.width) * 100;
- 
+
   // Ensure the percentage is within 0 to 100
   const validPercentage = Math.min(100, Math.max(0, percentage));
   console.log(validPercentage);
   volKnob.style.left = `${validPercentage}%`;
- // Do something with the volume based on the validPercentage (e.g., update audio volume)
+  // Do something with the volume based on the validPercentage (e.g., update audio volume)
   const volume = validPercentage / 100;
-  
 
   if (currSong) {
     currSong.volume = volume;
