@@ -312,8 +312,7 @@ footer {
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  /* margin: 0px 10px; */
-  transform: translateY(-50%);
-  left: 95%;
-  cursor: pointer;
+  transform: translateY(-50%) translateX(-50%); 
+  left: calc(var(--volume) * 90%); 
+  cursor: pointer;
 }
