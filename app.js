@@ -160,12 +160,23 @@ function handleDragVol(e) {
   // Ensure the percentage is within 0 to 100
   const validPercentage = Math.min(100, Math.max(0, percentage));
   console.log(validPercentage);
+  // if(validPercentage > 95 && validPercentage <=100){
+  //   volKnob.style.left = `${95}%`;
+  // }
   volKnob.style.left = `${validPercentage}%`;
   // Do something with the volume based on the validPercentage (e.g., update audio volume)
   const volume = validPercentage / 100;
 
   if (currSong) {
     currSong.volume = volume;
+  }
+
+  if (0.1 <= volume && volume <= 0.5) {
+    document.getElementById("volImg").src = "./img/volumeL.svg";
+  } else if (0.51 <= volume && volume <= 1.0) {
+    document.getElementById("volImg").src = "./img/volumeH.svg";
+  } else {
+    document.getElementById("volImg").src = "./img/mute.svg";
   }
 
   console.log(`Volume: ${volume}`);
@@ -377,6 +388,20 @@ async function main() {
 
   document.addEventListener("mouseup", () => {
     isDrag = false;
+  });
+
+  let isMute = false;
+  volImg.addEventListener("click", () => {
+    isMute = !isMute;
+    if (isMute) {
+      volImg.src = "./img/mute.svg";
+      volKnob.style.left = `${0}%`;
+      currSong.volume = 0;
+    } else {
+      currSong.volume = 1;
+      volKnob.style.left = `${95}%`;
+      volImg.src = "./img/volumeH.svg";
+    }
   });
 }
 

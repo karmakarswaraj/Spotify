@@ -306,7 +306,7 @@ footer {
 }
 
 #volKnob {
-  width: 10px;
+  width: 5px;
   height: 5px;
   background-color: #000000;
   border-radius: 50%;
@@ -314,6 +314,6 @@ footer {
   top: 50%;
   /* margin: 0px 10px; */
   transform: translateY(-50%);
-  left: 90%;
+  left: 95%;
   cursor: pointer;
 }
