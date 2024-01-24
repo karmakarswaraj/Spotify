@@ -483,8 +483,35 @@ footer {
 }
 @media (max-width: 1069px) {
   .boxes {
-    gap: 10%;
+    gap: 5%;
     justify-content: center;
   }
-  
+  .card {
+    width: 15.5vw;
+  }
+  .song-nav {
+    width: 60vw;
+  }
+  .seek {
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    /* margin-right: 26px;
+    margin-left: 26px; */
+  }
+
+  #duration {
+    right: 5px;
+  }
+  #totalDuration {
+    left: 5px;
+  }
+  .song-info {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .more {
+    padding-right: 15px;
+  }
 }
+/* SEEK BAR WIDTH AT 1069 */
