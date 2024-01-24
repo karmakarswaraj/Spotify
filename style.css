@@ -7,6 +7,7 @@
 html,
 body {
   height: 100%;
+  user-select: none;
 }
 
 body {
@@ -14,11 +15,11 @@ body {
   padding: 0;
   overflow: hidden;
 }
-#left {
+.left {
   width: 18vw;
-  border-right: 1px solid white;
+  /* border-right: 1px solid white; */
 }
-#right {
+.right {
   width: 82vw;
 }
 .home {
@@ -171,7 +172,7 @@ body {
 .head {
   display: flex;
   justify-content: space-between;
-  padding: 0px 18px 10px 18px;
+  padding: 15px 18px 10px 18px;
 }
 .head a {
   color: gray;
@@ -183,7 +184,7 @@ body {
   margin: 8px;
 }
 .card {
-  width: 165px;
+  width: 11%;
   height: 33vh;
   padding: 18px;
   position: relative;
@@ -207,9 +208,18 @@ body {
   top: 125px;
   right: 25px;
   opacity: 0;
-  transition: 1s ease-in;
+  transition: 0.5s ease-in;
 }
-
+.card:hover .play {
+  opacity: 1;
+}
+.type {
+  padding: 0px 18px 10px 18px;
+}
+.card:hover {
+  background: #303030;
+  transition: 0.5s ease-in;
+}
 .play svg {
   width: 60%;
   stroke: #000000;
@@ -260,10 +270,10 @@ footer {
   transition: width 0.1s linear;
   width: 0;
 }
-.seek:hover .progress-bar{
+.seek:hover .progress-bar {
   background-color: rgb(77, 230, 92);
 }
-.seek:active .progress-bar{
+.seek:active .progress-bar {
   background-color: rgb(77, 230, 92);
 }
 
@@ -311,5 +321,65 @@ footer {
   left: calc(var(--volume) * 90%);
   transform: translateY(-50%) translateX(-50%);
 }
+/* #left{
+  height: 100%;
+  right: 0;
+  box-sizing: border-box;
+}
+#right{
+  height: 100%;
+  right: 0;
+  box-sizing: border-box;
+} */
+
+/* #left::after {
+  content: '';
+  background-color: #ccc;
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  cursor: ew-resize;
+  left: 0;
+}
 
 
+#right::after {
+  content: '';
+  background-color: #ccc;
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  cursor: ew-resize;
+  right: 0;
+} */
+
+@media (max-width: 1650px) {
+  /* .left{
+    width: 35%;
+  } */
+  .card {
+    width: 10.5%;
+  }
+  .play {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    justify-content: center;
+    position: absolute;
+    top: 105px;
+    right: 25px;
+  }
+  .local-songs ul li{
+    gap: 7px;
+    padding: 5px 9px;
+    font-size: small;
+    
+  }
+  .local ul{
+    min-height: 35vh;
+  }
+
+
+
+}

@@ -2,12 +2,17 @@ const seekBar = document.querySelector(".seek");
 const progressBar = document.querySelector(".progress-bar");
 const volBar = document.getElementById("volBar");
 const volKnob = document.getElementById("volKnob");
+// const leftPanel = document.getElementById("left");
+// const rightPanel = document.getElementById("right");
+
+// const BORDER_SIZE = 0;
 
 let currSong = new Audio();
 let songs;
 let currFolder;
 let isRepeat = false;
 let isShuffle = false;
+// let startPosLeft, startPosRight;
 
 let getSongs = async function (folder) {
   currFolder = folder;
@@ -185,6 +190,20 @@ function handleDragVol(e) {
   console.log(`Volume: ${volume}`);
 }
 
+// function resizeLeft(e) {
+//   const dx = startPosLeft - e.clientX;
+//   startPosLeft = e.clientX;
+//   leftPanel.style.width = `${parseInt(getComputedStyle(leftPanel).width) + dx}px`;
+//   rightPanel.style.width = `${parseInt(getComputedStyle(rightPanel).width) - dx}px`;
+// }
+
+// function resizeRight(e) {
+//   const dx = startPosRight - e.clientX;
+//   startPosRight = e.clientX;
+//   rightPanel.style.width = `${parseInt(getComputedStyle(rightPanel).width) + dx}px`;
+//   leftPanel.style.width = `${parseInt(getComputedStyle(leftPanel).width) - dx}px`;
+// }
+
 async function main() {
   songs = await getSongs("songs/second");
 
@@ -287,7 +306,6 @@ async function main() {
     // This event is triggered once
     const totalDurationElement = document.getElementById("totalDuration");
     totalDurationElement.textContent = formatTime(currSong.duration);
-    
   });
 
   currSong.addEventListener("timeupdate", () => {
@@ -298,7 +316,7 @@ async function main() {
     const progressBar = seekBar.querySelector(".progress-bar");
     const progress = (currSong.currentTime / currSong.duration) * 100;
     progressBar.style.width = `${progress}%`;
-    if(currSong.currentTime == currSong.duration){
+    if (currSong.currentTime == currSong.duration) {
       play.src = "./img/play1.svg";
     }
   });
@@ -388,9 +406,7 @@ async function main() {
       const { songName, artistName } = getSongDetails(firstSong);
       playMusic(songName, artistName);
     }
-});
-
-  
+  });
 
   let isDrag = false;
 
@@ -424,6 +440,29 @@ async function main() {
       volImg.src = "./img/volumeH.svg";
     }
   });
+
+  //Make dynamic RIGHT and LEFT div
+
+  // leftPanel.addEventListener("mousedown", (e) => {
+  //   const handleLeft = leftPanel.getBoundingClientRect().left;
+  //   if (e.clientX - handleLeft < BORDER_SIZE) {
+  //     startPosLeft = e.clientX;
+  //     document.addEventListener("mousemove", resizeLeft);
+  //   }
+  // });
+
+  // rightPanel.addEventListener("mousedown", (e) => {
+  //   const handleLeft = rightPanel.getBoundingClientRect().left;
+  //   if (e.clientX - handleLeft < BORDER_SIZE) {
+  //     startPosRight = e.clientX;
+  //     document.addEventListener("mousemove", resizeRight);
+  //   }
+  // });
+
+  // document.addEventListener("mouseup", () => {
+  //   document.removeEventListener("mousemove", resizeLeft);
+  //   document.removeEventListener("mousemove", resizeRight);
+  // });
 }
 
 main();
