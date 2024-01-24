@@ -21,6 +21,7 @@ body {
 }
 .right {
   width: 82vw;
+  /* height: 70vh; */
 }
 .home {
   margin: 8px 4px 4px 8px;
@@ -35,7 +36,7 @@ body {
   color: white;
 }
 .box-2 {
-  height: 80vh;
+  height: 70vh;
   margin: 8px 4px 4px 8px;
 }
 .stack {
@@ -182,6 +183,7 @@ body {
   padding: 0px 0px 40px 0px;
   height: 65vh;
   margin: 8px;
+  gap: 15px;
 }
 .card {
   width: 11%;
@@ -318,8 +320,12 @@ footer {
   border-radius: 50%;
   position: absolute;
   background-color: #000000;
-  left: calc(var(--volume) * 90%);
+  left: 100%;
   transform: translateY(-50%) translateX(-50%);
+}
+.centered-button {
+  gap: 5px;
+  align-items: center;
 }
 /* #left{
   height: 100%;
@@ -352,14 +358,24 @@ footer {
   cursor: ew-resize;
   right: 0;
 } */
+@media (max-width: 1810px) {
+  .play {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    justify-content: center;
+    position: absolute;
+    top: 43%;
+    right: 25px;
+  }
+}
 
 @media (max-width: 1650px) {
-  /* .left{
-    width: 35%;
-  } */
-  .card {
-    width: 10.5%;
+  .left {
+    width: 20vw;
   }
+
   .play {
     width: 30px;
     height: 30px;
@@ -370,16 +386,105 @@ footer {
     top: 105px;
     right: 25px;
   }
-  .local-songs ul li{
+  .local-songs ul li {
     gap: 7px;
     padding: 5px 9px;
     font-size: small;
-    
   }
-  .local ul{
+  .local ul {
     min-height: 35vh;
   }
+  .boxes {
+    gap: 13px;
+  }
+  .lib-box {
+    margin-bottom: 10px;
+  }
+  .lib-box ul li {
+    padding-top: 8px;
+  }
 
+  .lib-box ul li p {
+    font-size: smaller;
+  }
+  .btn {
+    font-size: smaller;
+    padding: 8px 10px;
+  }
+  .footer {
+    font-size: smaller;
+    padding: 5px;
+  }
+  .box-2 {
+    height: 65vh;
+  }
 
+  .footer-btn {
+    padding: 10px;
+  }
+}
 
+@media (max-width: 1599px) {
+  .left {
+    width: 25vw;
+  }
+  .boxes {
+    justify-content: left;
+    gap: 30px;
+    max-height: 60vh;
+  }
+  .card {
+    width: 15%;
+    height: auto;
+  }
+  .play {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    justify-content: center;
+    position: absolute;
+    top: 44%;
+    right: 25px;
+  }
+}
+
+@media (max-width: 1223px) {
+  .boxes {
+    justify-content: left;
+    gap: 20px;
+    /* max-height: 60vh; */
+  }
+  .card {
+    width: 13vw;
+  }
+}
+
+@media (max-width: 1158px) {
+  .boxes {
+    gap: 20px;
+    justify-content: left;
+  }
+  .card {
+    width: 13vw;
+  }
+  .card span {
+    font-size: smaller;
+  }
+}
+
+@media (max-width: 1125px) {
+  .song-info {
+    padding: 5px 30px 0px 30px;
+    position: relative;
+    overflow: hidden;
+    width: 12%;
+  }
+}
+@media (max-width: 1069px) {
+  .boxes {
+    gap: 10%;
+    justify-content: center;
+  }
+  
 }
