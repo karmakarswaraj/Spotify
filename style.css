@@ -287,19 +287,19 @@ footer {
   margin: 10px;
   padding: 2px;
   border-radius: 10px;
-  background-color: #4a4949;
   cursor: pointer;
   position: relative;
+  background-color: #4a4949;
 }
 
 #volKnob {
   width: 5px;
   height: 5px;
-  background-color: #000000;
+  top: 50%;
+  cursor: pointer;
   border-radius: 50%;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%) translateX(-50%); 
-  left: calc(var(--volume) * 90%); 
-  cursor: pointer;
+  background-color: #000000;
+  left: calc(var(--volume) * 90%);
+  transform: translateY(-50%) translateX(-50%);
 }
