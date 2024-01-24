@@ -453,7 +453,6 @@ footer {
   .boxes {
     justify-content: left;
     gap: 20px;
-    /* max-height: 60vh; */
   }
   .card {
     width: 13vw;
