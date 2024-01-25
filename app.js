@@ -46,10 +46,10 @@ let getSongs = async function (folder) {
     localSongs.innerHTML = "";
 
     let currentlyPlayingLi = null;
-    let isFirstIteration = true;
+    // let isFirstIteration = true;
 
     Object.entries(songs).forEach(([key, value]) => {
-      if (!isFirstIteration) {
+      // if (!isFirstIteration) {
         let { songName, artistName } = getSongDetails(key); // get the song details
 
         localSongs.innerHTML += `<li><img class="invert mimg" src="./img/music.svg" alt>
@@ -59,9 +59,9 @@ let getSongs = async function (folder) {
         </div>
         <img class="invert play-button" src="./img/playnow.svg" alt="">
       </li>`; // add the song to the local songs
-      } else {
-        isFirstIteration = false;
-      }
+      // } else {
+        // isFirstIteration = false;
+      // }
     });
 
     const allLiElements = localSongs.querySelectorAll("li");
@@ -288,72 +288,57 @@ function handleDragVol(e) {
 // }
 
 async function displayAlbum() {
-  let response = await fetch(`http://127.0.0.1:5500/songs/`);
-  let data = await response.text();
-  // console.log(data);
+  try {
+    const response = await fetch('http://127.0.0.1:5500/songs/');
+    const data = await response.text();
 
-  let div = document.createElement("div");
-  div.innerHTML = data;
-  let anchors = div.getElementsByTagName("a");
-  let cardContainer = document.querySelector(".boxes");
+    const div = document.createElement('div');
+    div.innerHTML = data;
+    const anchors = div.getElementsByTagName('a');
+    const cardContainer = document.querySelector('.boxes');
+    console.log(response);
+    const fetchPromises = Array.from(anchors)
+      .filter(a => a.href.includes('/songs/'))
+      .map(a => {
+        const folders = a.href.split('/').slice(-2)[1];
 
-  for (let i = 0; i < anchors.length; i++) {
-    const a = anchors[i];
+        return fetch(`http://127.0.0.1:5500/songs/${folders}/info.json`)
+          .then(response => response.json())
+          .then(data => {
+            cardContainer.innerHTML += `
+              <div data-folder="${folders}" class="card rounded">
+                <div class="play flex align-centre">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="/icons/play-stroke-sharp.svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                    <path d="M5 20V4L19 12L5 20Z" stroke="#000000" stroke-width="1.5" stroke-linejoin="round" fill="#000"></path>
+                  </svg>
+                </div>
+                <img class="rounded" src="/songs/${folders}/cover.jpg" alt />
+                <div>
+                  <h3>${data.title}</h3>
+                  <span>${data.description}</span>
+                </div>
+              </div>`;
+          })
+          .catch(error => console.error(`Error fetching JSON from folder ${folders}:`, error));
+      });
 
-    if (a.href.includes("/songs/")) {
-      let folders = a.href.split("/").slice(-2)[1];
-      //Get metadeta
-      let response = await fetch(
-        `http://127.0.0.1:5500/${currFolder}/info.json`
-      );
-      console.log(response);
-      let data = await response.json();
-      console.log(data);
-      cardContainer.innerHTML += `<div data-folder="first" class="card rounded">
-      <div class="play flex align-centre">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          class="injected-svg"
-          data-src="/icons/play-stroke-sharp.svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          role="img"
-          color="#000000">
-          <path
-            d="M5 20V4L19 12L5 20Z"
-            stroke="#000000"
-            stroke-width="1.5"
-            stroke-linejoin="round"
-            fill="#000"></path>
-        </svg>
-      </div>
+    await Promise.all(fetchPromises);
 
-      <img
-        class="rounded"
-        src="/songs/${folders}/cover.jpg"}"
-        alt />
-      <div>
-        <h3>${data.title}</h3>
-        <span>${data.description}</span>
-      </div>
-    </div>`;
-    }
-
-    //Load the playlist whenever the cards are clicked
-    const cardElements = document.getElementsByClassName("card");
-
+    const cardElements = document.getElementsByClassName('card');
     for (const cardElement of cardElements) {
-      cardElement.addEventListener("click", async () => {
+      cardElement.addEventListener('click', async () => {
         const folderValue = cardElement.dataset.folder;
         songs = await getSongs(`songs/${folderValue}`);
-        // console.log(songs);
       });
     }
+  } catch (error) {
+    console.error('Error in displayAlbum function:', error);
   }
 }
+
+
+
+
 
 async function main() {
   await getSongs("songs/First"); //`songs/${currFolder}`
