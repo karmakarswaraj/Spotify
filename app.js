@@ -17,7 +17,7 @@ let isShuffle = false;
 let getSongs = async function (folder) {
   currFolder = folder;
   try {
-    let response = await fetch(`http://127.0.0.1:5500/${currFolder}`);
+    let response = await fetch(`http://127.0.0.1:5500/${currFolder}/`);
     let data = await response.text();
     // console.log(data);
 
@@ -27,19 +27,91 @@ let getSongs = async function (folder) {
     // Select all <a> elements within the document
     let aElements = doc.querySelectorAll("a");
 
-    const songs = {}; // create an object to store the songs
+    songs = {}; // create an object to store the songs
 
     // Now you can loop through the selected elements
     aElements.forEach((aElement) => {
       let title = aElement.getAttribute("title"); // or .innerText to get the text content
       let href = aElement.getAttribute("href");
-      if (title && href) {
+      if (title && href && href.endsWith(".mp3")) {
         let fileName = title.replace(".mp3", ""); // remove .mp3 from title
         songs[fileName] = href; // store href in songs object
       }
     });
 
-    return songs;
+    //Populates the local songs
+    const localSongs = document
+      .querySelector(".local-songs")
+      .getElementsByTagName("ul")[0]; // get the local songs
+    localSongs.innerHTML = "";
+
+    let currentlyPlayingLi = null;
+    let isFirstIteration = true;
+
+    Object.entries(songs).forEach(([key, value]) => {
+      if (!isFirstIteration) {
+        let { songName, artistName } = getSongDetails(key); // get the song details
+
+        localSongs.innerHTML += `<li><img class="invert mimg" src="./img/music.svg" alt>
+        <div class="info">
+          <div>${songName}</div>
+          <div>${artistName}</div>
+        </div>
+        <img class="invert play-button" src="./img/playnow.svg" alt="">
+      </li>`; // add the song to the local songs
+      } else {
+        isFirstIteration = false;
+      }
+    });
+
+    const allLiElements = localSongs.querySelectorAll("li");
+
+    let len = 0;
+    // add the click event listener
+    allLiElements.forEach((li) => {
+      len = len + 1;
+      li.addEventListener("click", async () => {
+        const songTitle = li.querySelector(".info").firstElementChild.innerHTML;
+        const artTitle = li.querySelector(".info").lastElementChild.innerHTML;
+        console.log(songTitle, artTitle);
+        if (
+          currSong.src !== "/songs/" + songTitle + ".mp3" &&
+          currSong.src !== "/songs/" + songTitle + "%20-%20" + artTitle + ".mp3"
+        ) {
+          // Play the new song if it's different from the currently playing song
+          playMusic(songTitle.trim(), artTitle.trim());
+
+          // Update the play/pause icons
+          updatePlayPauseIcon(li, true);
+
+          // Pause the currently playing song if any
+          if (currentlyPlayingLi) {
+            const prevSongTitle =
+              currentlyPlayingLi.querySelector(".info").firstElementChild
+                .innerHTML;
+            const prevArtTitle =
+              currentlyPlayingLi.querySelector(".info").lastElementChild
+                .innerHTML;
+            pauseMusic(prevSongTitle.trim(), prevArtTitle.trim());
+            updatePlayPauseIcon(currentlyPlayingLi, false);
+          }
+
+          currentlyPlayingLi = li;
+        } else {
+          // Toggle play/pause for the current song
+          if (currSong.paused) {
+            currSong.play().catch((error) => {
+              console.error("Failed to play audio:", error);
+            });
+          } else {
+            currSong.pause();
+          }
+
+          // Update the play/pause icons
+          updatePlayPauseIcon(li, !currSong.paused);
+        }
+      });
+    });
   } catch (error) {
     console.error("Error fetching or parsing data:", error);
   }
@@ -55,9 +127,20 @@ function getSongDetails(songTitle) {
 async function playMusic(songTitle, artist, pause = false, callback = null) {
   let src; // create a variable to store the source
 
-  if (artist === "Unknown") {
+  if (
+    artist === "Unknown" ||
+    artist === "" ||
+    artist === "null" ||
+    artist === undefined
+  ) {
+    // if the artist is unknown
+
     src = `${currFolder}/` + songTitle + ".mp3"; // if the artist is unknown
-  } else {
+  }
+  // else if (songTitle.endsWith(".json")){
+  //   src = `${currFolder}/` + songTitle;
+  // }
+  else {
     src = `${currFolder}/` + songTitle + "-" + artist + ".mp3"; // if the artist is known
   }
 
@@ -204,92 +287,91 @@ function handleDragVol(e) {
 //   leftPanel.style.width = `${parseInt(getComputedStyle(leftPanel).width) - dx}px`;
 // }
 
+async function displayAlbum() {
+  let response = await fetch(`http://127.0.0.1:5500/songs/`);
+  let data = await response.text();
+  // console.log(data);
+
+  let div = document.createElement("div");
+  div.innerHTML = data;
+  let anchors = div.getElementsByTagName("a");
+  let cardContainer = document.querySelector(".boxes");
+
+  for (let i = 0; i < anchors.length; i++) {
+    const a = anchors[i];
+
+    if (a.href.includes("/songs/")) {
+      let folders = a.href.split("/").slice(-2)[1];
+      //Get metadeta
+      let response = await fetch(
+        `http://127.0.0.1:5500/${currFolder}/info.json`
+      );
+      console.log(response);
+      let data = await response.json();
+      console.log(data);
+      cardContainer.innerHTML += `<div data-folder="first" class="card rounded">
+      <div class="play flex align-centre">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          class="injected-svg"
+          data-src="/icons/play-stroke-sharp.svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          role="img"
+          color="#000000">
+          <path
+            d="M5 20V4L19 12L5 20Z"
+            stroke="#000000"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+            fill="#000"></path>
+        </svg>
+      </div>
+
+      <img
+        class="rounded"
+        src="/songs/${folders}/cover.jpg"}"
+        alt />
+      <div>
+        <h3>${data.title}</h3>
+        <span>${data.description}</span>
+      </div>
+    </div>`;
+    }
+
+    //Load the playlist whenever the cards are clicked
+    const cardElements = document.getElementsByClassName("card");
+
+    for (const cardElement of cardElements) {
+      cardElement.addEventListener("click", async () => {
+        const folderValue = cardElement.dataset.folder;
+        songs = await getSongs(`songs/${folderValue}`);
+        // console.log(songs);
+      });
+    }
+  }
+}
+
 async function main() {
-  songs = await getSongs("songs/second");
+  await getSongs("songs/First"); //`songs/${currFolder}`
 
   const firstSong = Object.keys(songs)[1]; // get the first song
   console.log(firstSong);
-
   const [songName, artistName] = firstSong.split("-");
-
   await playMusic(songName, artistName, true); // play the first song
 
-  const localSongs = document
-    .querySelector(".local-songs")
-    .getElementsByTagName("ul")[0]; // get the local songs
+  //Display all the albums DYNAMICALLY
+  displayAlbum();
 
-  let isFirstIteration = true;
-  let currentlyPlayingLi = null;
-
-  Object.entries(songs).forEach(([key, value]) => {
-    if (!isFirstIteration) {
-      let { songName, artistName } = getSongDetails(key); // get the song details
-
-      localSongs.innerHTML += `<li><img class="invert mimg" src="./img/music.svg" alt>
-        <div class="info">
-          <div>${songName}</div>
-          <div>${artistName}</div>
-        </div>
-        <img class="invert play-button" src="./img/playnow.svg" alt="">
-      </li>`; // add the song to the local songs
-    } else {
-      isFirstIteration = false;
-    }
-  });
-
-  const allLiElements = localSongs.querySelectorAll("li");
-
+  //Play and pause
   function updatePlayPauseIcon(li, isPlaying) {
     // update the play/pause icon
     const playButton = li.getElementsByClassName("invert")[1];
     playButton.src = isPlaying ? "./img/pausenow.svg" : "./img/playnow.svg";
   }
-  let len = 0;
-  allLiElements.forEach((li) => {
-    // add the click event listener
-    len = len + 1;
-    li.addEventListener("click", async () => {
-      const songTitle = li.querySelector(".info").firstElementChild.innerHTML;
-      const artTitle = li.querySelector(".info").lastElementChild.innerHTML;
-      console.log(songTitle, artTitle);
-      if (
-        currSong.src !== "/songs/" + songTitle + ".mp3" &&
-        currSong.src !== "/songs/" + songTitle + "%20-%20" + artTitle + ".mp3"
-      ) {
-        // Play the new song if it's different from the currently playing song
-        playMusic(songTitle.trim(), artTitle.trim());
-
-        // Update the play/pause icons
-        updatePlayPauseIcon(li, true);
-
-        // Pause the currently playing song if any
-        if (currentlyPlayingLi) {
-          const prevSongTitle =
-            currentlyPlayingLi.querySelector(".info").firstElementChild
-              .innerHTML;
-          const prevArtTitle =
-            currentlyPlayingLi.querySelector(".info").lastElementChild
-              .innerHTML;
-          pauseMusic(prevSongTitle.trim(), prevArtTitle.trim());
-          updatePlayPauseIcon(currentlyPlayingLi, false);
-        }
-
-        currentlyPlayingLi = li;
-      } else {
-        // Toggle play/pause for the current song
-        if (currSong.paused) {
-          currSong.play().catch((error) => {
-            console.error("Failed to play audio:", error);
-          });
-        } else {
-          currSong.pause();
-        }
-
-        // Update the play/pause icons
-        updatePlayPauseIcon(li, !currSong.paused);
-      }
-    });
-  });
 
   play.addEventListener("click", async () => {
     if (currSong.paused) {
