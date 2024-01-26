@@ -46,7 +46,7 @@ body {
   margin-left: 15px;
   color: white;
 }
-.playlist{
+.playlist {
   height: 81vh;
 }
 .playlist-button {
@@ -81,7 +81,7 @@ body {
   margin: 10px 8px 10px 8px;
   max-height: 40vh;
 }
-#info{
+#info {
   margin: 5px;
 }
 .local-songs ul li {
@@ -186,7 +186,7 @@ body {
   color: gray;
   font-size: small;
 }
-.logo2{
+.logo2 {
   display: none;
 }
 .boxes {
@@ -241,7 +241,6 @@ body {
   font-size: small;
 }
 .scroll {
-  
   overflow-y: scroll;
 }
 
@@ -340,7 +339,7 @@ footer {
   gap: 5px;
   align-items: center;
 }
-.left .close{
+.left .close {
   display: none;
 }
 /* #left{
@@ -353,7 +352,6 @@ footer {
   right: 0;
   box-sizing: border-box;
 } */
-
 /* #left::after {
   content: '';
   background-color: #ccc;
@@ -363,8 +361,6 @@ footer {
   cursor: ew-resize;
   left: 0;
 }
-
-
 #right::after {
   content: '';
   background-color: #ccc;
@@ -374,8 +370,9 @@ footer {
   cursor: ew-resize;
   right: 0;
 } */
+
 @media (max-width: 2000px) {
-  .playlist{
+  .playlist {
     height: 79vh;
   }
 }
@@ -390,11 +387,10 @@ footer {
     top: 43%;
     right: 25px;
   }
-  .playlist{
+  .playlist {
     height: 79vh;
   }
 }
-
 @media (max-width: 1650px) {
   .left {
     width: 20vw;
@@ -444,9 +440,7 @@ footer {
   .footer-btn {
     padding: 10px;
   }
- 
 }
-
 @media (max-width: 1599px) {
   .left {
     width: 25vw;
@@ -470,11 +464,10 @@ footer {
     top: 44%;
     right: 25px;
   }
-  .playlist{
+  .playlist {
     height: 78.3vh;
   }
 }
-
 @media (max-width: 1239px) {
   .boxes {
     justify-content: left;
@@ -484,7 +477,6 @@ footer {
     width: 13vw;
   }
 }
-
 @media (max-width: 1158px) {
   .boxes {
     gap: 20px;
@@ -497,7 +489,6 @@ footer {
     font-size: smaller;
   }
 }
-
 @media (max-width: 1125px) {
   .song-info {
     padding: 5px 30px 0px 30px;
@@ -538,13 +529,12 @@ footer {
   .more {
     padding-right: 15px;
   }
-  .lib-box{
+  .lib-box {
     padding: 20px;
   }
 }
-
 @media (max-width: 1000px) {
-  .left{
+  .left {
     position: absolute;
     left: -100%;
     transition: all 0.3s ease-out;
@@ -552,16 +542,16 @@ footer {
     background-color: #000000;
     width: 33vw;
   }
-  .right{
+  .right {
     width: 100%;
   }
-  .navigate{
+  .navigate {
     display: none;
   }
-  .logo2{
+  .logo2 {
     display: block;
   }
-  .left .close{
+  .left .close {
     display: block;
     position: absolute;
     top: 0;
@@ -569,9 +559,7 @@ footer {
     padding: 20px;
   }
 }
-
 @media (max-width: 955px) {
-  
   .card {
     width: 20vw;
   }
@@ -596,7 +584,6 @@ footer {
     right: 25px;
   }
 }
-
 @media (max-width: 830px) {
   #totalDuration {
     left: 25px;
@@ -604,7 +591,7 @@ footer {
   #duration {
     right: 25px;
   }
-  .pad{
+  .pad {
     padding: 0px 10px 2px 10px;
   }
   .card {
@@ -621,9 +608,8 @@ footer {
     right: 25px;
   }
 }
-
 @media (max-width: 800px) {
-  .left{
+  .left {
     width: 43%;
   }
   #totalDuration {
@@ -632,7 +618,7 @@ footer {
   #duration {
     right: 25px;
   }
-  .pad{
+  .pad {
     padding: 0px 10px 2px 10px;
   }
   .card {
