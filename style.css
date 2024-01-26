@@ -46,6 +46,9 @@ body {
   margin-left: 15px;
   color: white;
 }
+.playlist{
+  height: 81vh;
+}
 .playlist-button {
   background: none;
   border: none;
@@ -68,6 +71,7 @@ body {
   font-size: small;
 }
 .local-songs {
+  max-height: 40vh;
   background-color: #242424;
   padding-left: 10px;
   margin: 0px 10px 10px 10px;
@@ -76,6 +80,9 @@ body {
 .local-songs ul {
   margin: 10px 8px 10px 8px;
   max-height: 40vh;
+}
+#info{
+  margin: 5px;
 }
 .local-songs ul li {
   list-style-type: decimal;
@@ -179,15 +186,19 @@ body {
   color: gray;
   font-size: small;
 }
+.logo2{
+  display: none;
+}
 .boxes {
   padding: 0px 0px 40px 0px;
   height: 65vh;
-  margin: 8px;
+  margin: 8px 8px 20px 8px;
   gap: 15px;
 }
+
 .card {
   width: 11%;
-  height: 29vh;
+  height: 30vh;
   padding: 18px;
   position: relative;
   background: linear-gradient(to bottom, #1d1d1d, #242424);
@@ -226,9 +237,11 @@ body {
   width: 60%;
   stroke: #000000;
 }
-
+#info span {
+  font-size: small;
+}
 .scroll {
-  max-height: 100vh;
+  
   overflow-y: scroll;
 }
 
@@ -298,7 +311,7 @@ footer {
   padding: 5px 30px 0px 30px;
   position: relative;
   overflow: hidden;
-  width: 10%;
+  width: 15%;
 }
 
 #volBar {
@@ -326,6 +339,9 @@ footer {
 .centered-button {
   gap: 5px;
   align-items: center;
+}
+.left .close{
+  display: none;
 }
 /* #left{
   height: 100%;
@@ -358,6 +374,11 @@ footer {
   cursor: ew-resize;
   right: 0;
 } */
+@media (max-width: 2000px) {
+  .playlist{
+    height: 79vh;
+  }
+}
 @media (max-width: 1810px) {
   .play {
     width: 30px;
@@ -368,6 +389,9 @@ footer {
     position: absolute;
     top: 43%;
     right: 25px;
+  }
+  .playlist{
+    height: 79vh;
   }
 }
 
@@ -394,9 +418,7 @@ footer {
   .local ul {
     min-height: 35vh;
   }
-  .boxes {
-    gap: 13px;
-  }
+
   .lib-box {
     margin-bottom: 10px;
   }
@@ -422,6 +444,7 @@ footer {
   .footer-btn {
     padding: 10px;
   }
+ 
 }
 
 @media (max-width: 1599px) {
@@ -447,9 +470,12 @@ footer {
     top: 44%;
     right: 25px;
   }
+  .playlist{
+    height: 78.3vh;
+  }
 }
 
-@media (max-width: 1223px) {
+@media (max-width: 1239px) {
   .boxes {
     justify-content: left;
     gap: 20px;
@@ -480,7 +506,7 @@ footer {
     width: 12%;
   }
 }
-@media (max-width: 1069px) {
+@media (max-width: 1099px) {
   .boxes {
     gap: 5%;
     justify-content: center;
@@ -489,14 +515,14 @@ footer {
     width: 15.5vw;
   }
   .song-nav {
-    width: 60vw;
+    width: 53vw;
+  }
+  .song {
+    width: 50%;
   }
   .seek {
-    width: 85%;
-    display: flex;
-    justify-content: center;
-    /* margin-right: 26px;
-    margin-left: 26px; */
+    width: 90%;
+    margin-left: auto;
   }
 
   #duration {
@@ -506,11 +532,120 @@ footer {
     left: 5px;
   }
   .song-info {
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 0px;
   }
+
   .more {
     padding-right: 15px;
   }
+  .lib-box{
+    padding: 20px;
+  }
 }
-/* SEEK BAR WIDTH AT 1069 */
+
+@media (max-width: 1000px) {
+  .left{
+    position: absolute;
+    left: -100%;
+    transition: all 0.3s ease-out;
+    z-index: 1;
+    background-color: #000000;
+    width: 33vw;
+  }
+  .right{
+    width: 100%;
+  }
+  .navigate{
+    display: none;
+  }
+  .logo2{
+    display: block;
+  }
+  .left .close{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 955px) {
+  
+  .card {
+    width: 20vw;
+  }
+  .song-nav {
+    width: 53vw;
+  }
+  .song {
+    width: 50%;
+  }
+  .seek {
+    width: 90%;
+    margin-left: auto;
+  }
+  .play {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    justify-content: center;
+    position: absolute;
+    top: 49%;
+    right: 25px;
+  }
+}
+
+@media (max-width: 830px) {
+  #totalDuration {
+    left: 25px;
+  }
+  #duration {
+    right: 25px;
+  }
+  .pad{
+    padding: 0px 10px 2px 10px;
+  }
+  .card {
+    width: 20vw;
+  }
+  .play {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    justify-content: center;
+    position: absolute;
+    top: 47%;
+    right: 25px;
+  }
+}
+
+@media (max-width: 800px) {
+  .left{
+    width: 43%;
+  }
+  #totalDuration {
+    left: 25px;
+  }
+  #duration {
+    right: 25px;
+  }
+  .pad{
+    padding: 0px 10px 2px 10px;
+  }
+  .card {
+    width: 27vw;
+  }
+  .play {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    justify-content: center;
+    position: absolute;
+    top: 57%;
+    right: 25px;
+  }
+}

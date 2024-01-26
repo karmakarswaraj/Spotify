@@ -11,6 +11,9 @@
   <body>
     <div class="container flex bg-black">
       <div id="left" class="left">
+        <div id="closeBtn" class="close">
+          <img class="invert m1" src="./img/close.svg" alt="Spotify" />
+        </div>
         <div class="home bg-grey rounded">
           <div class="logo">
             <img class="invert m1" src="./img/logo.svg" alt="Spotify" />
@@ -30,7 +33,7 @@
             >
           </ul>
         </div>
-        <div class="box-2 bg-grey rounded scroll">
+        <div id="box2" class="box-2 bg-grey rounded scroll">
           <div class="stack flex m1">
             <div class="library">
               <a class="flex" href="/"
@@ -109,6 +112,9 @@
       <div id="right" class="right bg-grey rounded">
         <div class="header flex">
           <div class="nav">
+            <div class="logo2">
+              <img class="invert m1" src="./img/logo.svg" alt="Spotify" />
+            </div>
             <button class="navigate">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -241,8 +247,8 @@
               </div>
             </section>
           </div>
-
-          <div class="offline scroll"></div>
+          <!-- 
+          <div class="offline scroll"></div> -->
         </div>
       </div>
     </div>
@@ -259,19 +265,27 @@
           <img id="repeat" class="pad c-pointer" src="./img/repeat.svg" alt />
           <div id="totalDuration" class="totalDuration"></div>
         </div>
-        <div class="seek">
+        <div class="seek flex flex-wrap">
           <div class="progress-bar"></div>
         </div>
       </div>
       <div class="more">
+        <div class="extra">
+          <img
+            width="22"
+            height="22"
+            src="https://img.icons8.com/fluency-systems-regular/48/picture-in-picture.png"
+            alt="picture-in-picture"
+          />
+          <img src="./img/device.svg" alt />
+        </div>
+
         <div class="vol flex">
           <img id="volImg" src="./img/volumeH.svg" alt />
           <div id="volBar" class="vol-control">
             <div id="volKnob" class="vol-bar"></div>
           </div>
         </div>
-        <img src="./img/library.svg" alt />
-        <img src="./img/device.svg" alt />
       </div>
     </footer>
 

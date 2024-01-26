@@ -112,6 +112,7 @@ let getSongs = async function (folder) {
         }
       });
     });
+    return songs;
   } catch (error) {
     console.error("Error fetching or parsing data:", error);
   }
@@ -163,11 +164,13 @@ async function playMusic(songTitle, artist, pause = false, callback = null) {
       await currSong.play(); // play the song
       play.src = "./img/pause1.svg"; // update the play button
     }
-
+    if (artist === undefined) {
+      artist = "Unknown";
+    }
     document.querySelector(".song-info").innerHTML = `
     <div class="info">
-      <div>Song - ${songTitle}</div>
-      <div>Artist - ${artist}</div>
+      <div>🎵 ${songTitle}</div>
+      <div>by - ${artist}</div>
     </div>
   `; // update the song info
     duration.innerHTML = "00:00";
@@ -250,10 +253,6 @@ function handleDragVol(e) {
 
   // Ensure the percentage is within 0 to 100
   const validPercentage = Math.min(100, Math.max(0, percentage));
-  console.log(validPercentage);
-  // if(validPercentage > 95 && validPercentage <=100){
-  //   volKnob.style.left = `${95}%`;
-  // }
   volKnob.style.left = `${validPercentage}%`;
   // Do something with the volume based on the validPercentage (e.g., update audio volume)
   const volume = validPercentage / 100;
@@ -269,8 +268,6 @@ function handleDragVol(e) {
   } else {
     document.getElementById("volImg").src = "./img/mute.svg";
   }
-
-  console.log(`Volume: ${volume}`);
 }
 
 // function resizeLeft(e) {
@@ -296,7 +293,7 @@ async function displayAlbum() {
     div.innerHTML = data;
     const anchors = div.getElementsByTagName("a");
     const cardContainer = document.querySelector(".boxes");
-    console.log(response);
+
     const fetchPromises = Array.from(anchors)
       .filter((a) => a.href.includes("/songs/"))
       .map((a) => {
@@ -313,7 +310,7 @@ async function displayAlbum() {
                   </svg>
                 </div>
                 <img class="rounded" src="/songs/${folders}/cover.jpeg" alt />
-                <div>
+                <div id="info">
                   <h3>${data.title}</h3>
                   <span>${data.description}</span>
                 </div>
@@ -326,11 +323,26 @@ async function displayAlbum() {
 
     await Promise.all(fetchPromises);
 
+    // Add click event listener to each card
     const cardElements = document.getElementsByClassName("card");
     for (const cardElement of cardElements) {
       cardElement.addEventListener("click", async () => {
         const folderValue = cardElement.dataset.folder;
         songs = await getSongs(`songs/${folderValue}`);
+
+        const playButton = cardElement.querySelector(".play"); // get the play button within the card
+
+        // left.style.display = "block";
+
+        left.style.left = "0";
+
+        playButton.addEventListener("click", async () => {
+          // Play the first song
+          let firstSong = Object.keys(songs)[0]; // get the first song
+
+          let [songName, artistName] = firstSong.split("-");
+          playMusic(songName, artistName); // play the first song
+        });
       });
     }
   } catch (error) {
@@ -338,15 +350,7 @@ async function displayAlbum() {
   }
 }
 
-
 async function main() {
-  await getSongs("songs/Party"); //`songs/${currFolder}`
-
-  const firstSong = Object.keys(songs)[0]; // get the first song
-  console.log(firstSong);
-  const [songName, artistName] = firstSong.split("-");
-  await playMusic(songName, artistName, true); // play the first song
-
   //Display all the albums DYNAMICALLY
   displayAlbum();
 
@@ -479,7 +483,6 @@ async function main() {
   volBar.addEventListener("mousedown", (e) => {
     e.preventDefault();
     isDrag = true;
-    console.log("down");
     handleDragVol(e);
   });
 
@@ -529,6 +532,12 @@ async function main() {
   //   document.removeEventListener("mousemove", resizeLeft);
   //   document.removeEventListener("mousemove", resizeRight);
   // });
+
+  //Add event listner for close button
+
+  closeBtn.addEventListener("click", () => {
+    left.style.left = "-100%";
+  });
 }
 
 main();
