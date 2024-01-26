@@ -312,7 +312,7 @@ async function displayAlbum() {
                     <path d="M5 20V4L19 12L5 20Z" stroke="#000000" stroke-width="1.5" stroke-linejoin="round" fill="#000"></path>
                   </svg>
                 </div>
-                <img class="rounded" src="/songs/${folders}/cover.jpg" alt />
+                <img class="rounded" src="/songs/${folders}/cover.jpeg" alt />
                 <div>
                   <h3>${data.title}</h3>
                   <span>${data.description}</span>
@@ -338,10 +338,11 @@ async function displayAlbum() {
   }
 }
 
-async function main() {
-  await getSongs("songs/First"); //`songs/${currFolder}`
 
-  const firstSong = Object.keys(songs)[1]; // get the first song
+async function main() {
+  await getSongs("songs/Party"); //`songs/${currFolder}`
+
+  const firstSong = Object.keys(songs)[0]; // get the first song
   console.log(firstSong);
   const [songName, artistName] = firstSong.split("-");
   await playMusic(songName, artistName, true); // play the first song
