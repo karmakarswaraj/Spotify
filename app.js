@@ -178,6 +178,13 @@ async function playMusic(songTitle, artist, pause = false, callback = null) {
     if (callback && typeof callback === "function") {
       callback();
     }
+
+    document.querySelector(".songInfo").innerHTML = `
+    <div class="info">
+      <div>🎵 ${songTitle}</div>
+      <div>by - ${artist}</div>
+    </div>
+  `;
   } catch (error) {
     console.error("Failed to play audio:", error);
   }
@@ -537,6 +544,36 @@ async function main() {
 
   closeBtn.addEventListener("click", () => {
     left.style.left = "-100%";
+  });
+
+  //Add event listner for minimize button
+  let isClicked = false;
+  up.addEventListener("click", () => {
+    console.log("up");
+    let more = document.querySelector(".more");
+    let sInfo = document.querySelector(".song-info");
+    if (!isClicked) {
+      popupContent.style.top = "-100px";
+      popupContent.style.right = "18px";
+     
+      more.style.display = "block";
+      more.style.position = "absolute";
+      
+      sInfo.style.display = "block";
+      sInfo.style.position = "absolute";
+
+      up.src = "./img/down.svg";
+      isClicked = true;
+    }else{
+      isClicked = false;
+      popupContent.style.top = "100px";
+
+      more.style.display = "none";
+      sInfo.style.display = "none";
+      up.src = "./img/up.svg";
+    }
+
+    
   });
 }
 
