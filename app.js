@@ -19,7 +19,6 @@ let getSongs = async function (folder) {
   try {
     let response = await fetch(`http://127.0.0.1:5500/${currFolder}/`);
     let data = await response.text();
-    // console.log(data);
 
     let parser = new DOMParser(); // Create a new instance of the DOMParser class
     let doc = parser.parseFromString(data, "text/html"); // Parse the HTML string
@@ -73,7 +72,7 @@ let getSongs = async function (folder) {
       li.addEventListener("click", async () => {
         const songTitle = li.querySelector(".info").firstElementChild.innerHTML;
         const artTitle = li.querySelector(".info").lastElementChild.innerHTML;
-        console.log(songTitle, artTitle);
+
         if (
           currSong.src !== "/songs/" + songTitle + ".mp3" &&
           currSong.src !== "/songs/" + songTitle + "%20-%20" + artTitle + ".mp3"
@@ -232,7 +231,7 @@ async function playShuffledSongs(songs) {
 
   for (const key of shuffledKeys) {
     const { songName, artistName } = getSongDetails(key);
-    // console.log(songName, artistName);
+
     playMusic(songName, artistName);
 
     // Add a delay if needed between playing each song
@@ -358,6 +357,7 @@ async function displayAlbum() {
 }
 
 async function main() {
+
   //Display all the albums DYNAMICALLY
   displayAlbum();
 
@@ -448,11 +448,9 @@ async function main() {
       `/songs/${currFolder}` + currSong.src.split("/").slice(-1)[0]
     );
 
-    console.log(index);
-
     if (index > 0) {
       const prevSong = Object.keys(songs)[index - 1];
-      console.log(prevSong);
+
       const { songName, artistName } = getSongDetails(prevSong);
       playMusic(songName, artistName);
     } else {
@@ -470,11 +468,9 @@ async function main() {
       `/songs/${currFolder}` + currSong.src.split("/").slice(-1)[0]
     );
 
-    console.log(index);
-
     if (index < Object.keys(songs).length - 2) {
       const nextSong = Object.keys(songs)[index + 1];
-      console.log(nextSong);
+
       const { songName, artistName } = getSongDetails(nextSong);
       playMusic(songName, artistName);
     } else {
@@ -485,6 +481,7 @@ async function main() {
     }
   });
 
+  //Add event listener for volume
   let isDrag = false;
 
   volBar.addEventListener("mousedown", (e) => {
@@ -503,6 +500,7 @@ async function main() {
     isDrag = false;
   });
 
+  //Add event listener for volume
   let isMute = false;
   volImg.addEventListener("click", () => {
     isMute = !isMute;
@@ -541,7 +539,6 @@ async function main() {
   // });
 
   //Add event listner for close button
-
   closeBtn.addEventListener("click", () => {
     left.style.left = "-100%";
   });
@@ -549,22 +546,23 @@ async function main() {
   //Add event listner for minimize button
   let isClicked = false;
   up.addEventListener("click", () => {
-    console.log("up");
+
     let more = document.querySelector(".more");
     let sInfo = document.querySelector(".song-info");
+
     if (!isClicked) {
       popupContent.style.top = "-100px";
       popupContent.style.right = "18px";
-     
+
       more.style.display = "block";
       more.style.position = "absolute";
-      
+
       sInfo.style.display = "block";
       sInfo.style.position = "absolute";
 
       up.src = "./img/down.svg";
       isClicked = true;
-    }else{
+    } else {
       isClicked = false;
       popupContent.style.top = "100px";
 
@@ -572,9 +570,21 @@ async function main() {
       sInfo.style.display = "none";
       up.src = "./img/up.svg";
     }
-
-    
   });
-}
 
+  //Time
+  let date = new Date();
+  let time = date.getHours();
+
+  let h2 = document.querySelector(".head h2");
+  if (time >= 4 && time < 11) {
+    h2.innerHTML = "Good Morning";
+  } else if (time >= 11 && time < 16) {
+    h2.innerHTML = "Good Afternoon";
+  } else if (time >= 16 && time < 20) {
+    h2.innerHTML = "Good Evening";
+  } else {
+    h2.innerHTML = "Good Night";
+  }
+}
 main();

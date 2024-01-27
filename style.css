@@ -388,7 +388,6 @@ footer {
   .playlist {
     height: 79vh;
   }
-  
 }
 @media (max-width: 1810px) {
   .play {
@@ -490,7 +489,9 @@ footer {
   .card {
     width: 13vw;
   }
-  .left,.right,.boxes{
+  .left,
+  .right,
+  .boxes {
     height: 88vh;
   }
 }
@@ -513,7 +514,8 @@ footer {
     overflow: hidden;
     width: 12%;
   }
-  .left,.right{
+  .left,
+  .right {
     height: 88vh;
   }
 }
@@ -552,7 +554,9 @@ footer {
   .lib-box {
     padding: 20px;
   }
-  .left,.right,.boxes{
+  .left,
+  .right,
+  .boxes {
     height: 88vh;
   }
 }
@@ -606,7 +610,9 @@ footer {
     top: 49%;
     right: 25px;
   }
-  .left,.right,.boxes{
+  .left,
+  .right,
+  .boxes {
     height: 95vh;
   }
 }
@@ -633,7 +639,9 @@ footer {
     top: 47%;
     right: 25px;
   }
-  .left,.right,.boxes{
+  .left,
+  .right,
+  .boxes {
     height: 93vh;
   }
 }
@@ -668,7 +676,9 @@ footer {
     margin-right: 5%;
     padding: 0px;
   }
-  .left,.right,.boxes{
+  .left,
+  .right,
+  .boxes {
     height: 91.8vh;
   }
 }
@@ -849,7 +859,8 @@ footer {
     top: 65%;
     right: 30px;
   }
-  .left,.right{
+  .left,
+  .right {
     height: 90vh;
   }
 }
@@ -921,7 +932,9 @@ footer {
     top: 31px;
     right: 5px;
   }
-  .left,.right,.boxes{
+  .left,
+  .right,
+  .boxes {
     height: 91.5vh;
   }
 }
@@ -938,18 +951,15 @@ footer {
   }
   .left {
     width: 80%;
-    
   }
-  
+
   .play {
     top: 60%;
   }
   .seek {
     margin-left: 69px;
   }
-  
 }
-
 @media (max-width: 390px) {
   .song-info {
     left: 39%;
@@ -964,7 +974,8 @@ footer {
   .play {
     top: 58%;
   }
-  #duration,#totalDuration {
+  #duration,
+  #totalDuration {
     font-size: 12px;
   }
   #duration {
@@ -973,7 +984,7 @@ footer {
   #totalDuration {
     left: 9px;
   }
-  .pad{
+  .pad {
     padding: 0px 8px;
   }
 }
@@ -989,28 +1000,55 @@ footer {
     top: -53%;
   }
 }
-
 @media (max-width: 340px) {
   .song-info {
-    left: 55%;
-    top: -150%;
-    width: 110px;
+    left: 32%;
+    top: -144%;
+    width: 153px;
   }
 
   .more {
-    left: 50%;
-    top: -35%;
+    left: 42%;
+    top: -63%;
+  }
+  .song-nav img {
+    width: 20px;
+    height: 20px;
+  }
+  #up {
+    right: 7px;
+    top: 25px;
+  }
+  .play {
+    top: 55%;
   }
 }
 @media (max-width: 300px) {
   .song-info {
-    left: 55%;
-    top: -150%;
-    width: 110px;
+    left: 22%;
+    top: -143%;
+    width: 162px;
   }
 
   .more {
-    left: 50%;
-    top: -35%;
+    left: 34%;
+    top: -65%;
+  }
+  #up {
+    right: -5px;
+  }
+  .seek {
+    margin-left: 64px;
+  }
+  .btn-1,
+  .btn {
+    font-size: 10px;
+    /* width: 50px; */
+    /* height: 10px; */
+  }
+  .logo2 img {
+    width: 70px;
   }
 }
+
+/* Screen compatible till 300 pixels */
