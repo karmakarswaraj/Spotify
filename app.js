@@ -588,3 +588,50 @@ async function main() {
   }
 }
 main();
+
+function applyStylesForScreenWidth() {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth <= 390) {
+    document.querySelector('.song-info').style.cssText = 'left: 39%; top: -116%; width: 149px;';
+    document.querySelector('.more').style.cssText = 'left: 49%; top: -51%;';
+    document.querySelector('.play').style.top = '58%';
+    document.querySelector('#duration, #totalDuration').style.fontSize = '12px';
+    document.querySelector('#duration').style.right = '-5px';
+    document.querySelector('#totalDuration').style.left = '9px';
+    document.querySelector('.pad').style.padding = '0px 8px';
+  }
+
+  if (screenWidth <= 360) {
+    document.querySelector('.song-info').style.cssText = 'left: 36%; top: -115%; width: 154px;';
+    document.querySelector('.more').style.cssText = 'left: 45%; top: -53%;';
+  }
+
+  if (screenWidth <= 340) {
+    document.querySelector('.song-info').style.cssText = 'left: 32%; top: -144%; width: 153px;';
+    document.querySelector('.more').style.cssText = 'left: 42%; top: -63%;';
+    document.querySelector('.song-nav img').style.cssText = 'width: 20px; height: 20px;';
+    document.querySelector('#up').style.cssText = 'right: 7px; top: 25px;';
+    document.querySelector('.play').style.top = '55%';
+  }
+
+  if (screenWidth <= 300) {
+    document.querySelector('.song-info').style.cssText = 'left: 22%; top: -143%; width: 162px;';
+    document.querySelector('.more').style.cssText = 'left: 34%; top: -65%;';
+    document.querySelector('#up').style.right = '-5px';
+    document.querySelector('.seek').style.marginLeft = '64px';
+    document.querySelectorAll('.btn-1, .btn').forEach(btn => {
+      btn.style.fontSize = '10px';
+      // Uncomment the following lines if you want to set width and height
+      // btn.style.width = '50px';
+      // btn.style.height = '10px';
+    });
+    document.querySelector('.logo2 img').style.width = '70px';
+  }
+}
+
+// Initial application of styles on page load
+applyStylesForScreenWidth();
+
+// Listen for screen width changes and reapply styles
+window.addEventListener('resize', applyStylesForScreenWidth);
